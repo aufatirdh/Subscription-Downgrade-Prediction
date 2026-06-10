@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamPredict | Customer Insights</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="background-animation"></div>
+    
+    <main class="container">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <h1>StreamPredict</h1>
+            </div>
+            <p>AI-Powered Customer Subscription Forecasting</p>
+        </header>
+
+        <section class="glass-card">
+            <form id="prediction-form">
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="tenure_months">Tenure (Months)</label>
+                        <input type="number" id="tenure_months" name="tenure_months" min="0" max="200" required placeholder="e.g. 24">
+                        <div class="focus-border"></div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="monthly_watch_hours">Monthly Watch Hours</label>
+                        <input type="number" step="0.1" id="monthly_watch_hours" name="monthly_watch_hours" min="0" required placeholder="e.g. 45.5">
+                        <div class="focus-border"></div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="customer_support_calls">Customer Support Calls</label>
+                        <input type="number" id="customer_support_calls" name="customer_support_calls" min="0" required placeholder="e.g. 2">
+                        <div class="focus-border"></div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="device_type">Device Type</label>
+                        <div class="select-wrapper">
+                            <select id="device_type" name="device_type" required>
+                                <option value="" disabled selected>Select Device</option>
+                                <option value="Smart TV">Smart TV</option>
+                                <option value="Mobile">Mobile</option>
+                                <option value="Web">Web</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="payment_method">Payment Method</label>
+                        <div class="select-wrapper">
+                            <select id="payment_method" name="payment_method" required>
+                                <option value="" disabled selected>Select Method</option>
+                                <option value="Credit Card">Credit Card</option>
+                                <option value="E-Wallet">E-Wallet</option>
+                                <option value="Bank Transfer">Bank Transfer</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <span class="btn-text">Generate Forecast</span>
+                    <div class="loader hidden" id="btn-loader"></div>
+                </button>
+            </form>
+        </section>
+
+        <!-- Result Section -->
+        <section class="result-card hidden" id="result-container">
+            <div class="result-header">
+                <h2>Forecasted Action</h2>
+                <div class="status-badge" id="prediction-badge">Retain</div>
+            </div>
+            
+            <div class="probability-section" id="probability-section">
+                <h3>Confidence Scores</h3>
+                <div class="bars-container" id="probability-bars">
+                    <!-- Bars injected by JS -->
+                </div>
+            </div>
+            
+            <div class="error-message hidden" id="error-message"></div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
