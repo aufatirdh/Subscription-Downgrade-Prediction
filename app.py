@@ -12,11 +12,13 @@ MODEL_PATH = os.path.join(
     'streaming_histgb_pipeline_v1_20260516.pkl'
 )
 
+model_error = None
 try:
     model = joblib.load(MODEL_PATH)
     print("Model loaded successfully.")
 except Exception as e:
     model = None
+    model_error = str(e)
     print(f"Error loading model: {e}")
 
 # Mapping label
@@ -34,7 +36,7 @@ def predict():
 
     if model is None:
         return jsonify({
-            'error': 'Model failed to load.'
+            'error': f'Model failed to load. Details: {model_error}'
         }), 500
 
     try:
